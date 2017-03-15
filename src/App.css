@@ -1,0 +1,78 @@
+.App {
+  text-align: left;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+  float: left;
+}
+
+.App-header {
+  background-color: #222;
+  height: 120px;
+  width: 100%;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.HeaderText {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* PhotoView class' */
+.BigPhoto {
+  width: 500px;
+  height: 500px;
+  float: left;
+  border: solid white 8px;
+  border-radius: 5px;
+  margin-left: 100px;
+}
+
+.PictureInfo {
+  padding-top: 50px;
+  width: 75%;
+  color: #222;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 75px;
+}
+
+/* PhotoList class' */
+.Thumbnails {
+  padding-top: 50px;
+  border-radius: 5px;
+}
+
+.upperHalf {
+  height: 450px;
+}
+
+.myButton {
+  float: right;
+  margin-right: 30px;
+  font-weight: bold;
+}
+
+/* Photo class' */
+.ThumbPicture {
+  border: solid white 8px;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.activePhoto {
+  opacity: 0.8;
+  transition: all 0.8s;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
