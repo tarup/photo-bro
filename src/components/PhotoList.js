@@ -39,7 +39,7 @@ class PhotoList extends Component {
     }
 
     backClicked() {
-      if (this.state.index !== 0) {
+      if (this.state.index >= 0 + 11) {
         this.setState({
           index: parseInt(this.state.index, 10)-12
         });
@@ -79,7 +79,7 @@ class PhotoList extends Component {
 
           <Button className="myButton" disabled={this.state.index >= 5000-11}
                   onClick={this.nextClicked.bind(this)}>Next</Button>
-          <Button className="myButton" disabled={this.state.index===0}
+          <Button className="myButton" disabled={this.state.index <= 0+11}
                   onClick={this.backClicked.bind(this)}>Back</Button>
         </div>
       )
