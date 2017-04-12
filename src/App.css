@@ -65,6 +65,7 @@
   border: solid white 8px;
   border-radius: 5px;
   width: 100px;
+  height: 100px;
 }
 
 .activePhoto {

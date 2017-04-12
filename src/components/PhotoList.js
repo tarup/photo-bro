@@ -8,7 +8,13 @@ class PhotoList extends Component {
     constructor() {
         super();
         this.state = {
-          pictures: [],
+          pictures: [{
+            "albumId": 0,
+            "id": 0,
+            "title": "Seal approves",
+            "url": "http://i1.kym-cdn.com/entries/icons/original/000/019/211/sealapproval.JPG",
+            "thumbnailUrl": "http://i1.kym-cdn.com/entries/icons/original/000/019/211/sealapproval.JPG"
+          }],
           index: 0,
           maxAmount: 4
         };
@@ -18,20 +24,16 @@ class PhotoList extends Component {
         let URL = 'https://jsonplaceholder.typicode.com/photos'
           fetch(URL)
           .then(result=>result.json())
-          .then(pictures=>this.setState({pictures}));
-    }
+          .then(pictures=>this.setState({pictures: this.state.pictures.concat(pictures)}));
 
-    //TODO  run when user is back to first/home page
-    resetIndex() {
-      this.setState({
-        index: 0
-      });
+        var count = this.props.indexcount;
+        this.setState({index: count})
     }
 
     nextClicked() {
       if(this.state.index <= 5000 - 11 ) {
         this.setState({
-          index: this.state.index+12
+          index: parseInt(this.state.index, 10)+12
         });
       }
     }
@@ -39,15 +41,22 @@ class PhotoList extends Component {
     backClicked() {
       if (this.state.index !== 0) {
         this.setState({
-          index: this.state.index-12
+          index: parseInt(this.state.index, 10)-12
         });
       }
     }
 
+    imgChosen(id) {
+      // console.log("img should change to " + imgnum)
+      this.props.changeView(id)
+    }
+
     render() {
+      //console.log(this.state.index)
       const items = this.state.pictures.map(
         (item) => <LazyLoad key={item.id} height={50} once={true}>
-                    <Photo key={item.id} item={item}/>
+                    <Photo key={item.id} item={item}
+                    changeImage={this.imgChosen.bind(this)}/>
                   </LazyLoad>
       )
 
@@ -68,9 +77,9 @@ class PhotoList extends Component {
             </Table>
           </div>
 
-          <Button className="myButton"
+          <Button className="myButton" disabled={this.state.index >= 5000-11}
                   onClick={this.nextClicked.bind(this)}>Next</Button>
-          <Button className="myButton"
+          <Button className="myButton" disabled={this.state.index===0}
                   onClick={this.backClicked.bind(this)}>Back</Button>
         </div>
       )

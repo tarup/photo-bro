@@ -11,18 +11,34 @@ export default class PhotoView extends Component {
   }
 
   componentDidMount() {
-    this.setState({picture: {
-      url: "http://i1.kym-cdn.com/entries/icons/original/000/019/211/sealapproval.JPG",
-      title: "Hello world!",
-      id: 5001
-    }});
+    if (this.props.params.id >= 0 && this.props.params.id <= 5000) {
+      //console.log("Proper id")
+      this.changeBigPhoto(this.props.params.id)
+    } else {
+      //console.log("Uncorrect id")
+      this.props.router.push('/photo/0')
+      this.changeBigPhoto(0)
+    }
   }
 
-  componentWillUpdate() {
-    let URL = 'https://jsonplaceholder.typicode.com/photos'
-      fetch(URL + "/" + this.props.params.id)
-      .then(result=>result.json())
-      .then(picture=>this.setState({picture}));
+  changeBigPhoto(id) {
+    //console.log("Photo id: " + id)
+    id = parseInt(id, 10);
+
+    if (id === 0) {
+      this.setState({picture: {
+        "albumId": 0,
+        "id": 0,
+        "title": "Seal approves",
+        "url": "http://i1.kym-cdn.com/entries/icons/original/000/019/211/sealapproval.JPG",
+        "thumbnailUrl": "http://i1.kym-cdn.com/entries/icons/original/000/019/211/sealapproval.JPG"}
+      })
+    } else {
+        let URL = 'https://jsonplaceholder.typicode.com/'
+        fetch(URL + "photos/" + id)
+        .then(result=>result.json())
+        .then(picture=>this.setState({picture}))
+    }
   }
 
   render(props) {
@@ -43,7 +59,8 @@ export default class PhotoView extends Component {
           </Col>
 
           <Col xs={12} sm={12} md={12} lg={4}>
-            <PhotoList />
+            <PhotoList changeView={this.changeBigPhoto.bind(this)}
+                       indexcount={this.props.params.id}/>
           </Col>
         </Table>
 

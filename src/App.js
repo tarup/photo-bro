@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header'
-import { IndexLink } from 'react-router'
+import { Link } from 'react-router'
 
 class App extends Component {
 
@@ -11,9 +11,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <IndexLink to="/">
-            <img src={logo} className="App-logo" alt="logo" />
-          </IndexLink>
+          <Link href="/photo/0">
+            <img src={logo} className="App-logo" alt="logo"/>
+          </Link>
           <Header />
           {this.props.children}
         </div>

@@ -8,7 +8,7 @@ import PhotoView from './components/PhotoView'
 ReactDOM.render((
     <Router history={browserHistory}>
     <Route path="/" component={App}>
-          <IndexRedirect to="/photo/1"/>
+          <IndexRedirect to="/photo/0"/>
           <Route path="/photo/:id" component={PhotoView}/>
       </Route>
     </Router>
